@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.vidDevBox = new System.Windows.Forms.ComboBox();
             this.audioDevBox = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -40,14 +41,31 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.cycleBox = new System.Windows.Forms.TextBox();
+            this.refreshBox = new System.Windows.Forms.TextBox();
+            this.percentSkinBox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.maxCbBox = new System.Windows.Forms.TextBox();
+            this.maxCrBox = new System.Windows.Forms.TextBox();
+            this.minCrBox = new System.Windows.Forms.TextBox();
+            this.minCbBox = new System.Windows.Forms.TextBox();
+            this.maxYBox = new System.Windows.Forms.TextBox();
+            this.minYBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.fileFormatBox = new System.Windows.Forms.ComboBox();
             this.vidSetBtn = new System.Windows.Forms.Button();
             this.audDevBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -57,16 +75,18 @@
             // 
             // vidDevBox
             // 
+            this.vidDevBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.vidDevBox.FormattingEnabled = true;
-            this.vidDevBox.Location = new System.Drawing.Point(95, 3);
+            this.vidDevBox.Location = new System.Drawing.Point(125, 5);
             this.vidDevBox.Name = "vidDevBox";
             this.vidDevBox.Size = new System.Drawing.Size(262, 21);
             this.vidDevBox.TabIndex = 0;
             // 
             // audioDevBox
             // 
+            this.audioDevBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.audioDevBox.FormattingEnabled = true;
-            this.audioDevBox.Location = new System.Drawing.Point(95, 3);
+            this.audioDevBox.Location = new System.Drawing.Point(125, 6);
             this.audioDevBox.Name = "audioDevBox";
             this.audioDevBox.Size = new System.Drawing.Size(262, 21);
             this.audioDevBox.TabIndex = 1;
@@ -77,7 +97,7 @@
             this.panel1.Controls.Add(this.vidDevBox);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 29);
+            this.panel1.Size = new System.Drawing.Size(390, 29);
             this.panel1.TabIndex = 2;
             // 
             // label1
@@ -95,7 +115,7 @@
             this.panel2.Controls.Add(this.audioDevBox);
             this.panel2.Location = new System.Drawing.Point(12, 47);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(360, 33);
+            this.panel2.Size = new System.Drawing.Size(390, 33);
             this.panel2.TabIndex = 0;
             // 
             // label2
@@ -109,6 +129,7 @@
             // 
             // browseBtn
             // 
+            this.browseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.browseBtn.ForeColor = System.Drawing.Color.Black;
             this.browseBtn.Location = new System.Drawing.Point(3, 26);
             this.browseBtn.Name = "browseBtn";
@@ -120,9 +141,10 @@
             // 
             // pathBox
             // 
+            this.pathBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pathBox.Location = new System.Drawing.Point(95, 28);
             this.pathBox.Name = "pathBox";
-            this.pathBox.Size = new System.Drawing.Size(262, 20);
+            this.pathBox.Size = new System.Drawing.Size(292, 20);
             this.pathBox.TabIndex = 4;
             // 
             // panel3
@@ -130,9 +152,9 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.pathBox);
             this.panel3.Controls.Add(this.browseBtn);
-            this.panel3.Location = new System.Drawing.Point(12, 125);
+            this.panel3.Location = new System.Drawing.Point(12, 203);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(360, 51);
+            this.panel3.Size = new System.Drawing.Size(390, 51);
             this.panel3.TabIndex = 3;
             // 
             // label3
@@ -149,10 +171,22 @@
             this.panel4.Controls.Add(this.button1);
             this.panel4.Controls.Add(this.cancelBtn);
             this.panel4.Controls.Add(this.saveBtn);
-            this.panel4.Location = new System.Drawing.Point(15, 220);
+            this.panel4.Location = new System.Drawing.Point(12, 289);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(357, 30);
+            this.panel4.Size = new System.Drawing.Size(387, 30);
             this.panel4.TabIndex = 6;
+            // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(338, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(46, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "About";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cancelBtn
             // 
@@ -179,39 +213,186 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.cycleBox);
+            this.panel5.Controls.Add(this.refreshBox);
+            this.panel5.Controls.Add(this.percentSkinBox);
+            this.panel5.Controls.Add(this.label12);
+            this.panel5.Controls.Add(this.label11);
+            this.panel5.Controls.Add(this.label10);
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.label7);
+            this.panel5.Controls.Add(this.label6);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.maxCbBox);
+            this.panel5.Controls.Add(this.maxCrBox);
+            this.panel5.Controls.Add(this.minCrBox);
+            this.panel5.Controls.Add(this.minCbBox);
+            this.panel5.Controls.Add(this.maxYBox);
+            this.panel5.Controls.Add(this.minYBox);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Controls.Add(this.fileFormatBox);
             this.panel5.Location = new System.Drawing.Point(12, 86);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(360, 33);
+            this.panel5.Size = new System.Drawing.Size(390, 111);
             this.panel5.TabIndex = 3;
-            this.panel5.Visible = false;
+            // 
+            // cycleBox
+            // 
+            this.cycleBox.Location = new System.Drawing.Point(279, 73);
+            this.cycleBox.Name = "cycleBox";
+            this.cycleBox.Size = new System.Drawing.Size(105, 20);
+            this.cycleBox.TabIndex = 19;
+            // 
+            // refreshBox
+            // 
+            this.refreshBox.Location = new System.Drawing.Point(279, 47);
+            this.refreshBox.Name = "refreshBox";
+            this.refreshBox.Size = new System.Drawing.Size(105, 20);
+            this.refreshBox.TabIndex = 18;
+            // 
+            // percentSkinBox
+            // 
+            this.percentSkinBox.Location = new System.Drawing.Point(279, 21);
+            this.percentSkinBox.Name = "percentSkinBox";
+            this.percentSkinBox.Size = new System.Drawing.Size(105, 20);
+            this.percentSkinBox.TabIndex = 17;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(222, 76);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(51, 13);
+            this.label12.TabIndex = 16;
+            this.label12.Text = "# Cycles:";
+            this.toolTip1.SetToolTip(this.label12, "Number of cycles of the skin detection algorithm until confirmation.");
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(206, 50);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Refresh (ms):";
+            this.toolTip1.SetToolTip(this.label11, "Refresh rate of skin-detection algorithm in miliseconds");
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 50);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(27, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "MIN";
+            this.toolTip1.SetToolTip(this.label10, "Minimum value to detect.\r\nShould be an integer >= 16 ");
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(108, 31);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(20, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Cb";
+            this.toolTip1.SetToolTip(this.label9, "Blue component factor");
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(166, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(17, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Cr";
+            this.toolTip1.SetToolTip(this.label8, "Red component factor");
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(228, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "% Skin:";
+            this.toolTip1.SetToolTip(this.label7, "Percentage of skin that should be covered by the webcam screen\r\nThis is a floatin" +
+                    "g-point value. An entry of 0.152 will read in as \"15.2%\" ");
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(54, 31);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(14, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Y";
+            this.toolTip1.SetToolTip(this.label6, "Luminosity factor");
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 76);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "MAX";
+            this.toolTip1.SetToolTip(this.label5, "Maximum value to detect.\r\nShould be an integer <= 235");
+            // 
+            // maxCbBox
+            // 
+            this.maxCbBox.Location = new System.Drawing.Point(94, 73);
+            this.maxCbBox.Name = "maxCbBox";
+            this.maxCbBox.Size = new System.Drawing.Size(50, 20);
+            this.maxCbBox.TabIndex = 8;
+            // 
+            // maxCrBox
+            // 
+            this.maxCrBox.Location = new System.Drawing.Point(150, 73);
+            this.maxCrBox.Name = "maxCrBox";
+            this.maxCrBox.Size = new System.Drawing.Size(50, 20);
+            this.maxCrBox.TabIndex = 7;
+            // 
+            // minCrBox
+            // 
+            this.minCrBox.Location = new System.Drawing.Point(150, 47);
+            this.minCrBox.Name = "minCrBox";
+            this.minCrBox.Size = new System.Drawing.Size(50, 20);
+            this.minCrBox.TabIndex = 6;
+            // 
+            // minCbBox
+            // 
+            this.minCbBox.Location = new System.Drawing.Point(94, 47);
+            this.minCbBox.Name = "minCbBox";
+            this.minCbBox.Size = new System.Drawing.Size(50, 20);
+            this.minCbBox.TabIndex = 5;
+            // 
+            // maxYBox
+            // 
+            this.maxYBox.Location = new System.Drawing.Point(38, 73);
+            this.maxYBox.Name = "maxYBox";
+            this.maxYBox.Size = new System.Drawing.Size(50, 20);
+            this.maxYBox.TabIndex = 4;
+            // 
+            // minYBox
+            // 
+            this.minYBox.Location = new System.Drawing.Point(38, 47);
+            this.minYBox.Name = "minYBox";
+            this.minYBox.Size = new System.Drawing.Size(50, 20);
+            this.minYBox.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 6);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.Size = new System.Drawing.Size(145, 13);
             this.label4.TabIndex = 2;
-            this.label4.Text = "File format:";
-            // 
-            // fileFormatBox
-            // 
-            this.fileFormatBox.FormattingEnabled = true;
-            this.fileFormatBox.Items.AddRange(new object[] {
-            ".wmv",
-            ".mp4",
-            ".avi"});
-            this.fileFormatBox.Location = new System.Drawing.Point(95, 3);
-            this.fileFormatBox.Name = "fileFormatBox";
-            this.fileFormatBox.Size = new System.Drawing.Size(61, 21);
-            this.fileFormatBox.TabIndex = 1;
+            this.label4.Text = "YCbCr and Skin Recognition:";
             // 
             // vidSetBtn
             // 
             this.vidSetBtn.ForeColor = System.Drawing.Color.Black;
-            this.vidSetBtn.Location = new System.Drawing.Point(12, 191);
+            this.vidSetBtn.Location = new System.Drawing.Point(12, 260);
             this.vidSetBtn.Name = "vidSetBtn";
             this.vidSetBtn.Size = new System.Drawing.Size(149, 23);
             this.vidSetBtn.TabIndex = 7;
@@ -222,25 +403,13 @@
             // audDevBtn
             // 
             this.audDevBtn.ForeColor = System.Drawing.Color.Black;
-            this.audDevBtn.Location = new System.Drawing.Point(220, 191);
+            this.audDevBtn.Location = new System.Drawing.Point(250, 260);
             this.audDevBtn.Name = "audDevBtn";
             this.audDevBtn.Size = new System.Drawing.Size(149, 23);
             this.audDevBtn.TabIndex = 8;
             this.audDevBtn.Text = "Audio Device Settings";
             this.audDevBtn.UseVisualStyleBackColor = true;
             this.audDevBtn.Click += new System.EventHandler(this.audDevBtn_Click);
-            // 
-            // button1
-            // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(308, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "About";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Settings
             // 
@@ -249,7 +418,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.CancelButton = this.cancelBtn;
-            this.ClientSize = new System.Drawing.Size(384, 262);
+            this.ClientSize = new System.Drawing.Size(414, 331);
             this.Controls.Add(this.audDevBtn);
             this.Controls.Add(this.vidSetBtn);
             this.Controls.Add(this.panel5);
@@ -294,9 +463,26 @@
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox fileFormatBox;
         private System.Windows.Forms.Button vidSetBtn;
         private System.Windows.Forms.Button audDevBtn;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox maxCbBox;
+        private System.Windows.Forms.TextBox maxCrBox;
+        private System.Windows.Forms.TextBox minCrBox;
+        private System.Windows.Forms.TextBox minCbBox;
+        private System.Windows.Forms.TextBox maxYBox;
+        private System.Windows.Forms.TextBox minYBox;
+        private System.Windows.Forms.TextBox cycleBox;
+        private System.Windows.Forms.TextBox refreshBox;
+        private System.Windows.Forms.TextBox percentSkinBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

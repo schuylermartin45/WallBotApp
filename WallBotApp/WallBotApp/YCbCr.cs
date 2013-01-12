@@ -6,6 +6,7 @@ using System.Drawing;
 
 namespace WallBotApp
 {
+    [Serializable]
     /// <summary>
     /// Represents a color combination as specified by the YCbCr color system
     /// Y: Luminosity (brightness) of image; Y is between 0 and 1 (black to white)
@@ -21,28 +22,29 @@ namespace WallBotApp
         //http://www.m-hikari.com/ams/ams-2012/ams-85-88-2012/chitraAMS85-88-2012.pdf
         //http://www.eurojournals.com/AJSR_21_13.pdf
         //current values derived from my tests using photoshop
-        public static int MINY = 50; //60
+        /*public static int MINY = 50; //60
         public static int MAXY = 90;
         
         public static int MINCb = 124; //127
         public static int MAXCb = 140; 
 
         public static int MINCr = 130;
-        public static int MAXCr = 140;
-
+        public static int MAXCr = 140;*/
         /// <summary>
         /// Y component Range: 16 to 235
         /// </summary>
-        private int Y;
+        public int Y
+        { get; set; }
         /// <summary>
         /// Cb component Range: 16 to 235
         /// </summary>
-        private int Cb;
+        public int Cb
+        { get; set; }
         /// <summary>
         /// Cr component Range: 16 to 235
         /// </summary>
-        private int Cr;
-
+        public int Cr
+        { get; set; }
         /// <summary>
         /// stores a visual of what has been processed and a mathematical equivalent
         /// </summary>
@@ -51,7 +53,9 @@ namespace WallBotApp
             public Bitmap MAP;
             public float PERCENT;
         }
-
+        public YCbCr()
+        {
+        }
         /// <summary>
         /// Construct a YCbCr object; collection of three values
         /// </summary>
@@ -73,6 +77,18 @@ namespace WallBotApp
             Console.WriteLine(this.Cb);
             Console.WriteLine(this.Cr);
             */
+        }
+        /// <summary>
+        /// Constructs based on given YCbCr values
+        /// </summary>
+        /// <param name="Y"></param>
+        /// <param name="Cb"></param>
+        /// <param name="Cr"></param>
+        public YCbCr(int Y, int Cb, int Cr)
+        {
+            this.Y = Y;
+            this.Cb = Cb;
+            this.Cr = Cr;
         }
 
         /// <summary>
@@ -96,7 +112,7 @@ namespace WallBotApp
         /// </summary>
         /// <param name="bmp"></param>
         /// <returns></returns>
-        public static float PercentFace(Bitmap bmp)
+        public static float PercentFace(Bitmap bmp, YCbCr minYCbCr, YCbCr maxYCbCr)
         {
             float facePixels = 0f;
             float totalPixels = ((float)bmp.Height * (float)bmp.Width);
@@ -107,11 +123,11 @@ namespace WallBotApp
                 {
                     //construct a YCbCr value set for each pixel (THIS MAY BE SLOW)
                     YCbCr temp = new YCbCr(bmp.GetPixel(row, col));
-                    if ((temp.Cr >= MINCr) && (temp.Cr <= MAXCr))
+                    if ((temp.Cr >= minYCbCr.Cr) && (temp.Cr <= maxYCbCr.Cr))
                     {
-                        if ((temp.Cb >= MINCb) && (temp.Cb <= MAXCb))
+                        if ((temp.Cb >= minYCbCr.Cb) && (temp.Cb <= maxYCbCr.Cb))
                         {
-                            if ((temp.Y >= MINY) && (temp.Y <= MAXY))
+                            if ((temp.Y >= minYCbCr.Y) && (temp.Y <= maxYCbCr.Y))
                             {
                                 //Keepin' that precesion
                                 facePixels += 1f;
@@ -127,7 +143,7 @@ namespace WallBotApp
         /// </summary>
         /// <param name="bmp"></param>
         /// <returns></returns>
-        public static Bitmap PercentFaceBmp(Bitmap bmp)
+        public static Bitmap PercentFaceBmp(Bitmap bmp, YCbCr minYCbCr, YCbCr maxYCbCr)
         {
             //copies over from the original
             Bitmap newMap = new Bitmap(bmp);
@@ -141,7 +157,7 @@ namespace WallBotApp
                     //construct a YCbCr value set for each pixel (THIS MAY BE SLOW)
                     YCbCr temp = new YCbCr(bmp.GetPixel(row,col));
                     //pixels that pass both tests are white
-                    if (((temp.Cr >= MINCr) && (temp.Cr <= MAXCr)) && ((temp.Cb >= MINCb) && (temp.Cb <= MAXCb)) && ((temp.Y >= MINY) && (temp.Y <= MAXY)))
+                    if (((temp.Cr >= minYCbCr.Cr) && (temp.Cr <= maxYCbCr.Cr)) && ((temp.Cb >= minYCbCr.Cb) && (temp.Cb <= maxYCbCr.Cb)) && ((temp.Y >= minYCbCr.Y) && (temp.Y <= maxYCbCr.Y)))
                         newMap.SetPixel(row, col, bmp.GetPixel(row,col)); //Color.White
                     /*
                     //pixels that pass just the red test are red
@@ -165,7 +181,7 @@ namespace WallBotApp
         /// </summary>
         /// <param name="bmp"></param>
         /// <returns></returns>
-        public static VisualPercent PercentFaceBoth(Bitmap bmp)
+        public static VisualPercent PercentFaceBoth(Bitmap bmp, YCbCr minYCbCr, YCbCr maxYCbCr)
         {
             float facePixels = 0f;
             float totalPixels = ((float)bmp.Height * (float)bmp.Width);
@@ -181,7 +197,7 @@ namespace WallBotApp
                     //construct a YCbCr value set for each pixel (THIS MAY BE SLOW)
                     YCbCr temp = new YCbCr(bmp.GetPixel(row, col));
                     //pixels that pass both tests are white
-                    if (((temp.Cr >= MINCr) && (temp.Cr <= MAXCr)) && ((temp.Cb >= MINCb) && (temp.Cb <= MAXCb)) && ((temp.Y >= MINY) && (temp.Y <= MAXY)))
+                    if (((temp.Cr >= minYCbCr.Cr) && (temp.Cr <= maxYCbCr.Cr)) && ((temp.Cb >= minYCbCr.Cb) && (temp.Cb <= maxYCbCr.Cb)) && ((temp.Y >= minYCbCr.Y) && (temp.Y <= maxYCbCr.Y)))
                     {
                         newMap.SetPixel(row, col, bmp.GetPixel(row, col));
                         //Keepin' that precesion

@@ -17,15 +17,15 @@ namespace WallBotApp
         /// <summary>
         /// percentage of the screen that the face should use
         /// </summary>
-        public static float SKINTHRESHOLD = 0.15f;
+        //public static float SKINTHRESHOLD = 0.15f;
         /// <summary>
         /// number of consequative confirmations of face to trigger audio event
         /// </summary>
-        public static int CONFIRMFRAMES = 3; //3
+        //public static int CONFIRMFRAMES = 3; //3
         /// <summary>
         /// refresh rate for checking for faces
         /// </summary>
-        public static int REFRESHRATE = 500;
+        //public static int REFRESHRATE = 500;
         
         /// <summary>
         /// Tracks if the last frame made the threshold
@@ -55,7 +55,7 @@ namespace WallBotApp
 
         public FaceHandler(mainScreen mainFrame)
         {
-            myTimer = new System.Timers.Timer(REFRESHRATE); //remember: 1000 miliseconds in 1 second
+            myTimer = new System.Timers.Timer(mainFrame.theSettings.msRefresh); //remember: 1000 miliseconds in 1 second
             myTimer.Elapsed += new ElapsedEventHandler(IncrementEvent);
             //initialize dat shit
             this.mainFrame = mainFrame;
@@ -106,7 +106,7 @@ namespace WallBotApp
             //process the colors of the image to show an image equivalent of how the face looks
             //Bitmap outImg = YCbCr.PercentFaceBmp(imageToTest);
             //float percentFloat = YCbCr.PercentFace(imageToTest);
-            YCbCr.VisualPercent convertedMap = YCbCr.PercentFaceBoth(imageToTest);
+            YCbCr.VisualPercent convertedMap = YCbCr.PercentFaceBoth(imageToTest,this.mainFrame.theSettings.minYCbCr,this.mainFrame.theSettings.maxYCbCr);
             double percent = Math.Round((double)convertedMap.PERCENT * 100.0, 2);
             //mainFrame.label2.Text = "Processing: " + percent + "% Face";
             //thread-safe way:
@@ -114,7 +114,7 @@ namespace WallBotApp
             mainFrame.pictureBox1.Image = convertedMap.MAP;
 
             //compare the calculated percent of skin against the threshold
-            if (convertedMap.PERCENT >= SKINTHRESHOLD)
+            if (convertedMap.PERCENT >= this.mainFrame.theSettings.percentSkin)
             {
 
                 if (this.lastFrameThresh == true)
@@ -124,7 +124,7 @@ namespace WallBotApp
                     //update the visual cntr
                     this.SetTextCycle("Cycles confirmed: " + threshCntr);
                     //if the threshCntr meets the consecuative frame check
-                    if (this.threshCntr == CONFIRMFRAMES)
+                    if (this.threshCntr == this.mainFrame.theSettings.cycleConfirm)
                     {
                         //kill this event for now
                         this.Stop();

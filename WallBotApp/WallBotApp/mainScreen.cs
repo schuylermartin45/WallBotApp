@@ -68,12 +68,8 @@ namespace WallBotApp
 
             // Make this source the active one
             audVidJob.ActivateSource(deviceSource);
-
-            //set text values for labels that allow the user how to use face detection
-            this.coverLbl.Text = "Allow for " + (FaceHandler.SKINTHRESHOLD*100f) + "% coverage for";
-            this.msLbl.Text = FaceHandler.REFRESHRATE + " milliseconds and";
-            this.cycleLbl.Text = FaceHandler.CONFIRMFRAMES + " refresh cycles";
-            this.curCycleLbl.Text = "Cycles confirmed: 0";
+            //update the face detection values displayed (based on what is read from the file)
+            this.updateDetectionGUI();
             this.statusLbl.Text = BoTStatus.Detecting.ToString();
             //check the number of videos recorded at start by counting how many videos have been recorded
             System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(theSettings.savePath); 
@@ -102,6 +98,16 @@ namespace WallBotApp
             {
                 audioDeviceLst.Add(eda.Name);
             }
+        }
+
+        //updates the GUI output for detection settings
+        private void updateDetectionGUI()
+        {
+            //set text values for labels that allow the user how to use face detection
+            this.coverLbl.Text = "Allow " + (this.theSettings.percentSkin * 100f) + "% coverage in";
+            this.msLbl.Text = this.theSettings.msRefresh + " milliseconds and";
+            this.cycleLbl.Text = this.theSettings.cycleConfirm + " refresh cycles";
+            this.curCycleLbl.Text = "Cycles confirmed: 0";
         }
 
         //take the string of the device chosen (from the GUI) and return the audio/video devices we need
@@ -135,6 +141,8 @@ namespace WallBotApp
         {
             Settings toOpen = new Settings(audioDeviceLst,vidDeviceLst,deviceSource);
             DialogResult result1 = toOpen.ShowDialog(this);
+            //update the gui with the new detection values
+            this.updateDetectionGUI();
             if (result1 == DialogResult.OK)
             {
                 //change the settings to whatever is currently in the file (may have been written/changed in the settings menu)
@@ -194,6 +202,8 @@ namespace WallBotApp
                     break;
             }
         }
+
+
         /*
         private void CptrImgBtn_Click(object sender, EventArgs e)
         {

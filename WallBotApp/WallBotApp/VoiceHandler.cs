@@ -211,7 +211,7 @@ namespace WallBotApp
             // Sets up publishing format for file archival type
             FileArchivePublishFormat fileOut = new FileArchivePublishFormat();
             // Sets file path and name
-            fileOut.OutputFileName = String.Format(mainFrame.theSettings.savePath + "Message_Recording{0:MM_dd_yy_hhmmss}" + mainFrame.theSettings.fileType, DateTime.Now);
+            fileOut.OutputFileName = String.Format(mainFrame.theSettings.savePath + "Message_Recording{0:MM_dd_yy_hhmmss}" + ".wmv", DateTime.Now);
             //prepares to publish the file, even as one of the 3 file types
             mainFrame.audVidJob.PublishFormats.Add(fileOut);
             // Start encoding (recording video)
