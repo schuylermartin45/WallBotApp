@@ -29,8 +29,6 @@ namespace WallBotApp
         /// </summary>
         private System.Timers.Timer myTimer;
 
-        private System.Timers.Timer tempTimer;
-
         /// <summary>
         /// Timeout of listening in milliseconds
         /// </summary>
@@ -109,6 +107,9 @@ namespace WallBotApp
             if (isRecording == false)
             {
                 this.SetTextStatus(mainScreen.BoTStatusStr[(int)mainScreen.BoTStatus.Listening]);
+                //more in-your face message       
+                Messenger thanks = new Messenger("WaLLBoT Listening");
+                thanks.ShowDialog();
                 //reset the confirmation for the next set of detecting
                 this.SetTextCycle("Cycles confirmed: 0");
             }
@@ -125,7 +126,7 @@ namespace WallBotApp
         }
 
         /// <summary>
-        /// Function that keeps track of time
+        /// Function that keeps track of time (for mic)
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
@@ -134,8 +135,13 @@ namespace WallBotApp
             this.clockTimeOut += VoiceHandler.REFRESHRATE;
             if (this.clockTimeOut >= VoiceHandler.timeOut)
             {
-                this.Stop();
-                this.stopRecord();
+                if (this.isRecording == false)
+                {
+                    Messenger message = new Messenger("Mic has Timed out");
+                    message.ShowDialog();
+                    this.Stop();
+                    this.stopRecord();
+                }
             }
         }
 
@@ -151,7 +157,6 @@ namespace WallBotApp
         public void StopTimeOut()
         {
             myTimer.Stop();
-            //MessageBox.Show("Mic-TimeOut");
             //reset the time
             this.clockTimeOut = 0;
         }
@@ -181,21 +186,13 @@ namespace WallBotApp
             }
             if((e.Result.Text == VoiceHandler.stopCmd) && (isRecording == true))
             {
-                tempTimer = new System.Timers.Timer(2000);
-                tempTimer.Enabled = true;
-                tempTimer.Elapsed+=new ElapsedEventHandler(CloseBox);
-                MessageBox.Show("Thank You","Message Received");
+                Messenger thanks = new Messenger("Message  Received");
+                thanks.ShowDialog();
                 //stop listening
                 this.Stop();
                 //stop recording and save file
                 this.stopRecord();
             }
-        }
-
-        private void CloseBox(object source, ElapsedEventArgs e)
-        {
-            SendKeys.SendWait("{ESC}");
-            tempTimer.Enabled = false;
         }
 
         /// <summary>
@@ -206,12 +203,18 @@ namespace WallBotApp
             this.isRecording = true;
             //change the status of the WaLLBoT
             this.SetTextStatus(mainScreen.BoTStatusStr[(int)mainScreen.BoTStatus.Recording]);
+            //more in-your face message                
+            Messenger message = new Messenger("WaLLBoT Recording");
+            message.ShowDialog();
             //start the recoding limit of 5 minutes
             recordingLimTimer.Enabled = true;
             // Sets up publishing format for file archival type
             FileArchivePublishFormat fileOut = new FileArchivePublishFormat();
             // Sets file path and name
-            fileOut.OutputFileName = String.Format(mainFrame.theSettings.savePath + "Message_Recording{0:MM_dd_yy_hhmmss}" + ".wmv", DateTime.Now);
+            //check the number of videos recorded at start by counting how many videos have been recorded
+            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(mainFrame.theSettings.savePath);
+            mainFrame.numRecorded = dir.GetFiles().Length;
+            fileOut.OutputFileName = mainFrame.theSettings.savePath + "Message_" + (mainFrame.numRecorded+1) + ".wmv";
             //prepares to publish the file, even as one of the 3 file types
             mainFrame.audVidJob.PublishFormats.Add(fileOut);
             // Start encoding (recording video)
