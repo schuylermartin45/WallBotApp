@@ -360,7 +360,7 @@
             this.panel7.BackColor = System.Drawing.Color.Black;
             this.panel7.Controls.Add(this.label5);
             this.panel7.Controls.Add(this.label11);
-            this.panel7.Location = new System.Drawing.Point(349, 12);
+            this.panel7.Location = new System.Drawing.Point(277, 12);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(255, 68);
             this.panel7.TabIndex = 13;
