@@ -41,6 +41,10 @@ namespace WallBotApp
         /// Counts time. Tell your friends.
         /// </summary>
         private int clockTimeOut;
+        /// <summary>
+        /// Ctrls file formating/where to save to
+        /// </summary>
+        private FileArchivePublishFormat fileOut;
 
         /// <summary>
         /// Timeout of recording in milliseconds; set to 5 minutes
@@ -209,11 +213,12 @@ namespace WallBotApp
             //start the recoding limit of 5 minutes
             recordingLimTimer.Enabled = true;
             // Sets up publishing format for file archival type
-            FileArchivePublishFormat fileOut = new FileArchivePublishFormat();
+            fileOut = new FileArchivePublishFormat();
             // Sets file path and name
             //check the number of videos recorded at start by counting how many videos have been recorded
-            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(mainFrame.theSettings.savePath);
-            mainFrame.numRecorded = dir.GetFiles().Length;
+            //System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(mainFrame.theSettings.savePath);
+            //MessageBox.Show(
+            //mainFrame.numRecorded = dir.GetFiles().Length;
             fileOut.OutputFileName = mainFrame.theSettings.savePath + "Message_" + (mainFrame.numRecorded+1) + ".wmv";
             //prepares to publish the file, even as one of the 3 file types
             mainFrame.audVidJob.PublishFormats.Add(fileOut);
@@ -233,12 +238,14 @@ namespace WallBotApp
             this.StopTimeOut();
             //save the video
             //End the encoding process
-            mainFrame.audVidJob.StopEncoding(); 
+            mainFrame.audVidJob.StopEncoding();
+            mainFrame.audVidJob.PublishFormats.Remove(fileOut);
+            //mainFrame.audVidJob.Save(mainFrame.theSettings.savePath + "Message_" + (mainFrame.numRecorded + 1) + ".wmv");
             //start the facial detection back up
             mainFrame.faceRecognizer.Start();
             //check the number of videos recorded at start by counting how many videos have been recorded
-            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(mainFrame.theSettings.savePath);
-            mainFrame.numRecorded = dir.GetFiles().Length;
+            //System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(mainFrame.theSettings.savePath);
+            mainFrame.numRecorded++;
             this.SetVideoNumText(mainFrame.numRecorded.ToString());
         }
 
