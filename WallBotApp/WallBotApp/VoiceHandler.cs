@@ -231,6 +231,8 @@ namespace WallBotApp
         /// </summary>
         private void stopRecord()
         {
+            if(this.isRecording == true)
+                mainFrame.numRecorded++;
             this.isRecording = false;
             //cut the 5min video timer (just in case) as well
             recordingLimTimer.Enabled = false;
@@ -245,7 +247,6 @@ namespace WallBotApp
             mainFrame.faceRecognizer.Start();
             //check the number of videos recorded at start by counting how many videos have been recorded
             //System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(mainFrame.theSettings.savePath);
-            mainFrame.numRecorded++;
             this.SetVideoNumText(mainFrame.numRecorded.ToString());
         }
 
